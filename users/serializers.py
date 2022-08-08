@@ -4,12 +4,13 @@ from .models import CustomUser
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
-    user_name = serializers.CharField(required=True)
     password = serializers.CharField(min_length=8, write_only=True)
+    is_freelancer = serializers.BooleanField(write_only=True, required=True)
+    is_company = serializers.BooleanField(write_only=True, required=True)
 
     class Meta:
         model = CustomUser
-        fields = ("email", "user_name", "password")
+        fields = ("email", "password", "is_freelancer", "is_company")
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):

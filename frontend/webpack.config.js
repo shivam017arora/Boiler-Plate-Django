@@ -4,9 +4,11 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "./static/frontend"),
+    path: path.resolve(__dirname, "./static/frontend/"),
     filename: "[name].js",
+    publicPath: "/static/frontend/",
   },
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -25,7 +27,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         // This has effect on the react lib size
-        NODE_ENV: JSON.stringify("production"),
+        NODE_ENV: JSON.stringify("development"),
       },
     }),
   ],
